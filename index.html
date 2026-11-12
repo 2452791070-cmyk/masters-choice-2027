@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f3">
+  <meta name="description" content="六条英国硕士路线，十项或八项比较。调节权重、编辑名次，实时看见选择如何变化。">
+  <title>英国硕士择校实验室 · 2027</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./presentation.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到比较内容</a>
+  <header class="site-header">
+    <a class="wordmark" href="./" aria-label="择校实验室首页"><span class="brand-icon" aria-hidden="true">↗</span><span>择校实验室<small>MASTER'S CHOICE / 2027</small></span></a>
+    <div class="header-actions"><span class="local-label"><i></i><span id="saveStatus">仅保存在此浏览器</span></span><button class="button button-light present-button" id="presentationButton" type="button" aria-pressed="false"><span aria-hidden="true">▣</span><span class="action-label">展示模式</span></button><button class="button button-light" id="exportButton" type="button"><span aria-hidden="true">↓</span><span class="action-label">导出方案</span></button></div>
+  </header>
+  <main id="main">
+    <section class="intro">
+      <div class="intro-copy"><div class="eyebrow"><span></span> EVIDENCE × PRIORITIES / 2027</div><h1>把选择的理由，<br>看得更清楚<span>。</span></h1><p>从六条英国硕士路线出发，把官方资料、个人判断与未来期待放在同一张桌上。调节权重，让选择更接近你。</p><div class="intro-meta"><div><strong>06</strong><span>候选路线</span></div><div><strong id="dimensionCount">10</strong><span>比较维度</span></div><div><strong id="evidenceCount">32</strong><span>官方资料入口</span></div></div></div>
+      <div class="hero-visual"><figure class="hero-photo hero-photo-main"><img src="./assets/bristol.jpg" alt="布里斯托大学Wills Memorial Building地标" fetchpriority="high"><figcaption>Bristol <span>01 / SIX ROUTES</span></figcaption></figure><figure class="hero-photo hero-photo-side"><img src="./assets/manchester.jpg" alt="曼彻斯特大学Whitworth Hall室内" loading="lazy"><figcaption>Manchester</figcaption></figure><figure class="hero-photo hero-photo-bottom"><img src="./assets/cranfield.png" alt="Cranfield校区历史航拍" loading="lazy"><figcaption>Cranfield <span>实际校区，分别比较</span></figcaption></figure><button class="photo-source-button" type="button" data-view="sources" data-source-topic="图片">照片原始出处 ↗</button></div>
+    </section>
+    <div class="family-share"><div><strong>把这份比较带给家人</strong><p>公开网站无需登录。每个人都可自行调整权重和名次，设置保存在各自浏览器；分享方案链接可传递当前设置。</p></div><button class="button button-dark" id="shareButton" type="button">复制当前方案链接 <span aria-hidden="true">↗</span></button></div>
+    <div class="presentation-guide"><span>展示顺序</span><button type="button" data-view="info">01 了解六条路线</button><i>→</i><button type="button" data-view="dashboard">02 调节你的权重</button><i>→</i><button type="button" data-view="sources">03 回到原始资料</button></div>
+    <div class="evidence-legend" aria-label="信息类型说明"><button type="button" data-view="sources" data-source-kind="official"><i class="legend-dot official"></i>官方资料<span>可跳转原文</span></button><button type="button" data-view="sources" data-source-kind="estimate"><i class="legend-dot estimate"></i>预算估算<span>公开计算口径</span></button><button type="button" data-view="sources" data-source-kind="judgement"><i class="legend-dot judgement"></i>主观名次<span>由你修改</span></button><span class="legend-date">资料核查 · 2026.11.12</span></div>
+    <section class="control-strip" aria-label="比较设置">
+      <div class="model-switch" role="group" aria-label="比较维度"><button type="button" data-mode="ten" aria-pressed="true">十项明细<span>各 10%</span></button><button type="button" data-mode="eight" aria-pressed="false">八项综合<span>各 12.5%</span></button></div>
+      <div class="view-switch" role="group" aria-label="页面视图"><button type="button" data-view="dashboard" class="active">权重与结果</button><button type="button" data-view="matrix">名次矩阵</button><button type="button" data-view="info">项目资料</button><button type="button" data-view="sources">资料与出处</button></div>
+    </section>
+    <p class="model-description" id="modelDescription"></p>
+    <section id="dashboardView" class="view">
+      <div class="workspace">
+        <div class="weights-backdrop" id="weightsBackdrop" hidden></div>
+        <aside class="weights-panel" id="weightsPanel" aria-label="调整比较权重">
+          <div class="panel-heading"><div><span class="section-kicker">01 / PRIORITIES</span><h2>什么对你更重要？</h2></div><button type="button" class="icon-button close-weights" id="closeWeights" aria-label="关闭权重面板">×</button></div>
+          <p class="panel-note">拖动一项，其余未锁定项按比例分配。<br>点锁图标，可固定你不想改变的比例。</p>
+          <div class="weight-total"><span>已分配权重</span><strong id="weightTotal">100.0<span>%</span></strong></div>
+          <div class="allocation-bar" id="allocationBar" aria-hidden="true"></div>
+          <div class="weight-controls" id="weightControls"></div>
+          <div class="weight-actions"><button class="button button-light" id="equalButton" type="button">恢复均分</button><button class="button button-light" id="unlockButton" type="button">全部解锁</button></div>
+          <div class="presets"><span>试试另一种取舍</span><div><button type="button" data-preset="career">职业优先</button><button type="button" data-preset="learning">学习优先</button><button type="button" data-preset="life">生活优先</button><button type="button" data-preset="cost">费用优先</button></div></div>
+        </aside>
+        <div class="results-panel">
+          <div class="result-topline"><span class="section-kicker">02 / YOUR SHORTLIST</span><span class="live-label"><i></i>随权重实时更新</span></div>
+          <div class="winner-card" id="winnerCard" aria-live="polite" aria-atomic="true"></div>
+          <div class="ranking-section"><div class="ranking-heading"><h2>六条路线，现在这样排</h2><span>加权平均名次 · 越小越优</span></div><div id="rankingList" class="ranking-list"></div></div>
+          <div class="insights-grid"><section class="insight-card"><span class="section-kicker">WEIGHT CHECK</span><h3>你正在重视什么</h3><div id="groupSummary"></div></section><section class="insight-card insight-caution"><span class="section-kicker">KEEP IN MIND</span><h3>结果是情景，不是保证</h3><p id="uncertaintyNote"></p><button type="button" class="text-button" data-view="matrix">查看并修改初始名次 <span>↗</span></button></section></div>
+          <details class="method-box"><summary>怎么算的？哪些地方还不确定？<span>＋</span></summary><div><p><strong>加权平均名次 = Σ（单项名次 × 该项权重）。</strong>例如两项各50%，某校分别第1和第3，则平均名次为2。并列按占用位置取平均；最终同分保留并列。</p><p>名次只保留先后，不表达差距大小。指标拆分也会改变实际权重：生活拆成四项并各占10%，实际就是40%。初始名次来自之前的讨论，不是官方排名、就业率或毕业率。</p><p>难度、毕业、留英及个人匹配尤其包含主观判断。考核资料不完整的格子标有「待核」；中间名次是情景占位，不能理解为已证明难度中等。请结合正式项目名称、offer及2027/28考核手册调整。</p><p>八项与十项使用各自的历史名次矩阵，切换同时改变指标与初始判断，因此两模式差异不能全部归因于权重。各模式的个人修改会分别保存。</p><p>本工具不按学术录取门槛排除学校；费用不设60万元硬上限；允许补考补交，关注额外学年风险。行政出证时间不作为毕业红线。</p></div></details>
+        </div>
+      </div>
+    </section>
+    <section id="matrixView" class="view" hidden>
+      <div class="section-header"><div><span class="section-kicker">THE ASSUMPTIONS</span><h2>你也可以修改判断本身。</h2><p>1 表示更有利，6 表示更不利。修改后点击应用，整行会按相对顺序整理，并列取平均名次。</p></div><div class="matrix-actions"><button class="button button-light" id="resetRanksButton" type="button">恢复初始名次</button><button class="button button-dark" id="applyRanksButton" type="button" disabled>应用名次修改</button></div></div>
+      <div class="source-note" id="matrixSource"></div>
+      <div class="matrix-scroll" tabindex="0" role="region" aria-label="可编辑的六校名次矩阵"><table id="rankMatrix"></table></div>
+      <div class="matrix-footnote"><span class="uncertain-dot"></span><p>「待核」表示考核或毕业依据不完整。所有其他名次也属于可修改的咨询判断，不代表就业、毕业或政策结果已被证实。</p></div>
+    </section>
+    <section id="infoView" class="view" hidden>
+      <div class="section-header"><div><span class="section-kicker">SIX ROUTES, SIX CONTEXTS</span><h2>名次之外，看看每条路的样子。</h2><p>官方学费与语言条件直接链接原文。校园影像用于认识学校，并非承诺的2027教室或住宿实景。</p></div><span class="snapshot">资料快照 · 2026.11.12</span></div>
+      <div class="budget-note"><strong>费用口径</strong><p>一年总额按 £1 = ¥9 的规划情景，含学费、12个月生活及约£3,000必要杂项；语言班与毕业后求职资金另计。生活方式、汇率和房源会改变实际费用，以上不是学校报价。部分语言班仅有旧年价格。</p></div>
+      <div id="schoolInfo" class="school-info-grid"></div>
+      <section class="policy-box"><h3>留英、回国与学位安排</h3><p>按现行规则，2027年起申请普通硕士Graduate visa通常为18个月；长期留英仍需要满足工作及签证条件。KCL公告计划2027年8月1日合并，学位证安排按接受offer时点等条件核对；Cranfield实际学习地点仍为Cranfield。成都落户与人才补贴按实际毕业及回国年份确认，未计入预算。</p><div id="sourceLinks"></div></section>
+    </section>
+    <section id="sourcesView" class="view" hidden>
+      <div class="section-header"><div><span class="section-kicker">FOLLOW THE EVIDENCE</span><h2>每条信息，都能找到它的来处。</h2><p>资料支持事实，名次表达判断。原文链接、适用年份和资料边界一起保留。</p></div><div class="source-tally"><strong id="sourceTotalCount">35</strong><span>资料条目<br>另有6组图片署名</span></div></div>
+      <div class="source-toolbar"><label class="source-search"><span aria-hidden="true">⌕</span><input id="sourceSearch" type="search" placeholder="搜索 IELTS、学费、闭卷、合并…" aria-label="搜索资料与出处"></label><label class="school-filter-label"><span>学校</span><select id="sourceSchool" aria-label="筛选学校"><option value="all">全部路线</option></select></label><label class="school-filter-label"><span>类型</span><select id="sourceKind" aria-label="筛选资料类型"><option value="all">全部类型</option><option value="official">官方资料</option><option value="estimate">预算估算</option><option value="judgement">主观名次</option><option value="pending">待核政策入口</option></select></label></div>
+      <div class="source-topics" id="sourceTopics" role="group" aria-label="筛选资料主题"></div>
+      <div class="source-result-line"><span id="sourceResultCount" role="status" aria-live="polite"></span><button type="button" class="text-button" id="clearSourceFilters">清除筛选</button></div>
+      <div id="sourceLibrary" class="source-library"></div>
+      <section class="photo-credit-section" id="photoCredits"><div class="section-header"><div><span class="section-kicker">IMAGE CREDITS</span><h2>校园影像与原图署名</h2><p>图片来自Wikimedia Commons，按版式裁切显示。点击原图页核对作者与许可；历史影像不代表2027设施状态。</p></div></div><div id="photoCreditGrid" class="photo-credit-grid"></div></section>
+    </section>
+    <footer class="site-footer"><div><span class="brand-mini">↗</span> 为你的下一步，保留选择空间。</div><div><button type="button" id="importButton">导入方案</button><input type="file" id="importFile" accept=".json,application/json" hidden><span id="storageFootnote">设置仅存于此浏览器；不会自动上传。</span></div></footer>
+  </main>
+  <div class="mobile-result" id="mobileResult"><div><small>当前领先</small><strong id="mobileLeader">布里斯托</strong></div><button class="button button-dark" type="button" id="openWeights">调整权重 <span>↗</span></button></div>
+  <dialog id="schoolDialog"><div class="dialog-top"><span class="section-kicker">ROUTE DETAILS</span><button class="icon-button" id="closeSchoolDialog" type="button" aria-label="关闭项目详情">×</button></div><div id="schoolDialogContent"></div></dialog>
+  <dialog id="shareDialog" class="share-dialog"><div class="dialog-top"><span class="section-kicker">SHARE YOUR SCENARIO</span><button class="icon-button" id="closeShareDialog" type="button" aria-label="关闭分享方案">×</button></div><h2>把当前方案发给家人</h2><p>链接包含你此刻的权重与名次。家人打开后可以继续调整，修改只保存在他们自己的浏览器，不会覆盖你的设置。</p><label for="shareUrl">方案链接</label><input id="shareUrl" type="text" readonly><button class="button button-dark" id="copyShareUrl" type="button">复制链接</button><small>链接中的设置会被持有链接的人看到。若国内网络无法打开，可发送离线单文件版本与导出的 JSON 方案。</small></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <noscript><div class="noscript">需要启用JavaScript才能调整权重和计算名次。</div></noscript>
+</body>
+</html>
